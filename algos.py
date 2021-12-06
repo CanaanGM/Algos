@@ -1,36 +1,38 @@
 import numpy
-from numpy.core.fromnumeric import sort 
+from numpy.core.fromnumeric import sort
+
 
 class SearchingAlgos:
     def __repr__(self) -> str:
         return "Simple implementation of algos"
 
-    def binary_search(self,sorted_list, target):
+    def binary_search(self, sorted_list, target):
         """
             Takes in a Sorted list
             returns None ; !taget
             returns the index of the target
         """
 
-        min = 0 
-        max = len(sorted_list) -1 
+        min = 0
+        max = len(sorted_list) - 1
 
         while (min <= max):
-            mid = (min + max) //2  # middle of the list
+            mid = (min + max) // 2  # middle of the list
             guess = sorted_list[mid]
             if (guess == target):
                 return mid
             if (guess > target):
-                max = mid - 1 
+                max = mid - 1
             if (guess < target):
-                min = mid  + 1 
+                min = mid + 1
         return -1
-    
+
+
 class SortingAlgos:
     def __repr__(self) -> str:
         return "Simple implementaion of sorting algoritms"
 
-    def bubble_sort(self,unsorted_list:list) -> list :
+    def bubble_sort(self, unsorted_list: list) -> list:
         """
             Takes in an unsorted list
             returns a sorted version of the same list but sorted
@@ -46,16 +48,17 @@ class SortingAlgos:
             [-9,0,1,12,99] -> stops cause we're sorted ~!
 
         """
-        for index, i in enumerate( unsorted_list):
+        for index, i in enumerate(unsorted_list):
             for jdex, j in enumerate(unsorted_list):
-                if unsorted_list[index] > unsorted_list[jdex]: # reverse the comparison to desc/asc
+                # reverse the comparison to desc/asc
+                if unsorted_list[index] > unsorted_list[jdex]:
                     temp = unsorted_list[jdex]
                     unsorted_list[jdex] = unsorted_list[index]
                     unsorted_list[index] = temp
-                    
+
         return unsorted_list
 
-    def selection_sort(self, unsorted_list:list) -> list:
+    def selection_sort(self, unsorted_list: list) -> list:
         """
             Takes in an unsorted list
             returns a sorted version of the same list but sorted
@@ -70,13 +73,13 @@ class SortingAlgos:
             [99,12,1,0,-9] -> stops cause we're sorted ~!
         """
         for i in range(len(unsorted_list)):
-            for j in range(len(unsorted_list) -i -1 ):
+            for j in range(len(unsorted_list) - i - 1):
                 if unsorted_list[j] > unsorted_list[i + 1]:
-                    unsorted_list[j] =  unsorted_list[j+1]
-                    unsorted_list[i] =   unsorted_list[j]
+                    unsorted_list[j] = unsorted_list[j+1]
+                    unsorted_list[i] = unsorted_list[j]
         return unsorted_list
 
-    def selection_sort_canaan(self, unsorted_list : list) -> list:
+    def selection_sort_canaan(self, unsorted_list: list) -> list:
         """
             have an empty array []
             find and save the minimum value of the given array in a var
@@ -93,8 +96,7 @@ class SortingAlgos:
         """
         return unsorted_list
 
-
-    def insertion_sort(self, unsorted_list:list) -> list:
+    def insertion_sort(self, unsorted_list: list) -> list:
         """
         sorts by placing the small values at the start of the list which creates an always sorted left side
         so any new values that comes in can find its place really quickly
@@ -111,9 +113,9 @@ class SortingAlgos:
 
 
         """
-        holder : int = 0
+        holder: int = 0
         for i in range(1, len(unsorted_list)):
-            j = i -1
+            j = i - 1
             holder = unsorted_list[i]
             while j >= 0 and holder < unsorted_list[j]:
                 unsorted_list[j] = unsorted_list[j+1]
@@ -121,7 +123,7 @@ class SortingAlgos:
             unsorted_list[j+1] = holder
         return unsorted_list
 
-    def merge_sort(self, unsorted_list : list) -> list:
+    def merge_sort(self, unsorted_list: list) -> list:
         """
             divides the given array in half
                 [6,3,4,5,2,1]
@@ -133,7 +135,7 @@ class SortingAlgos:
                 [3]    [4]          [2]      [1]
             left and right untill the halved list are one in length
             then u compare both lists and place the lower on the right and the higher on the left
-                    
+
                     [1,2,3,4,5,6]
                [3,4,6]   +     [1,2,5]
              [3,4] + [6]      [2,1] + [5]
@@ -145,11 +147,11 @@ class SortingAlgos:
             mid = len(unsorted_list) // 2
             right_side = unsorted_list[mid:]
             left_side = unsorted_list[:mid]
-            
+
             self.merge_sort(right_side)
             self.merge_sort(left_side)
 
-            i=j=k = 0  # i,j,k = 0 will result in exception not enoupg values to unpack
+            i = j = k = 0  # i,j,k = 0 will result in exception not enoupg values to unpack
 
             while i < len(left_side) and j < len(right_side):
                 if left_side[i] < right_side[j]:
@@ -162,8 +164,8 @@ class SortingAlgos:
 
             while i < len(left_side):
                 unsorted_list[k] = left_side[i]
-                i +=1 
-                k +=1
+                i += 1
+                k += 1
 
             while j < len(right_side):
                 unsorted_list[k] = right_side[j]
@@ -171,22 +173,22 @@ class SortingAlgos:
                 k += 1
         return unsorted_list
 
-    def quick_sort(self,unsorted_list:list, start , end) -> list:
-       """
-        pick an element and move the numbers less than it to its left and bigger to the right
-        [0,3,8,(9),334,6] -> 9
-        [0,3,8,6,9,334]
+    def quick_sort(self, unsorted_list: list, start, end) -> list:
+        """
+         pick an element and move the numbers less than it to its left and bigger to the right
+         [0,3,8,(9),334,6] -> 9
+         [0,3,8,6,9,334]
 
-       """
-       if len(unsorted_list) == 1:
-           return unsorted_list
-       if  start < end:
-           pivot_index = self._pivot(unsorted_list, start, end)
-           self.quick_sort(unsorted_list, start, pivot_index - 1)
-           self.quick_sort(unsorted_list, pivot_index +1, end)
-       return unsorted_list
+        """
+        if len(unsorted_list) == 1:
+            return unsorted_list
+        if start < end:
+            pivot_index = self._pivot(unsorted_list, start, end)
+            self.quick_sort(unsorted_list, start, pivot_index - 1)
+            self.quick_sort(unsorted_list, pivot_index + 1, end)
+        return unsorted_list
 
-    def _pivot(self, arr:list, start:int , end:int) -> int:
+    def _pivot(self, arr: list, start: int, end: int) -> int:
         """
         helper for quick_sort, return the index of the pivot 
         """
@@ -195,11 +197,12 @@ class SortingAlgos:
         for i in range(start, end):
             if arr[i] <= pivot:
                 swap_index += 1
-                arr[swap_index] , arr[i] = arr[i], arr[swap_index] # swap the values
-        arr[swap_index +1] , arr[end] = arr[end], arr[swap_index +1]
+                # swap the values
+                arr[swap_index], arr[i] = arr[i], arr[swap_index]
+        arr[swap_index + 1], arr[end] = arr[end], arr[swap_index + 1]
         return swap_index + 1
 
-    def radix_sort(self, unsorted_list:list) -> list:
+    def radix_sort(self, unsorted_list: list) -> list:
         """
         takes in an unsorted list. 
         makes 0-9 buckets  [[],[],[],[],[],[],[],[],[] ]
@@ -220,31 +223,31 @@ class SortingAlgos:
              0        1       2     3    4    5   6    7    8    9
 
         then again utill they're sorted in the right place
-        
+
         """
         max1 = max(unsorted_list)
-        exp = 1 
+        exp = 1
         while max1 / exp > 0:
             self.counting_sort(unsorted_list, exp)
             exp *= 10
         return unsorted_list
 
-    def counting_sort(self, unsorted_list:list, exp : int):
+    def counting_sort(self, unsorted_list: list, exp: int):
         list_length = len(unsorted_list)
 
-        sorted_list = [0] *(list_length)
-        count = [0] * 10 # buckets
+        sorted_list = [0] * (list_length)
+        count = [0] * 10  # buckets
 
         for i in range(0, list_length):
-            index = unsorted_list[i] // exp 
-            count[index% 10 ] += 1
+            index = unsorted_list[i] // exp
+            count[index % 10] += 1
 
-        for i in range(1,10):
+        for i in range(1, 10):
             count[i] += count[i-1]
 
         i = list_length - 1
         while i >= 0:
-            index = unsorted_list[i] // exp 
+            index = unsorted_list[i] // exp
             sorted_list[count[index % 10] - 1] = unsorted_list[i]
             count[index % 10] -= 1
             i -= 1
@@ -253,7 +256,7 @@ class SortingAlgos:
             unsorted_list[i] = sorted_list[i]
         # return unsorted_list
 
-    def _get_digit(self, number:int, place_in_number : int) -> int:
+    def _get_digit(self, number: int, place_in_number: int) -> int:
         """
             finds and returns the value at the place_in_number index
             get_digit( [1,2,3,4,5], 0) -> 5
@@ -282,34 +285,35 @@ class SortingAlgos:
         """
         # return len(str( abs(number)))
         import math
-        if number == 0 : return 1
-        return math.floor( math.log10(abs(number))) + 1
+        if number == 0:
+            return 1
+        return math.floor(math.log10(abs(number))) + 1
 
-    def _get_larget_number(self, arr:list) -> int:
+    def _get_larget_number(self, arr: list) -> int:
         """
         gets the count of digits for the longest number 
         did i say math is fast ? ? ? 
         """
-        maximum :int = 0
+        maximum: int = 0
         for i in arr:
             maximum = max(maximum, self._get_digit_count(i))
         return maximum
+
 
 if __name__ == "__main__":
     search_alogs = SearchingAlgos()
     sort_algos = SortingAlgos()
 
-    test_sorted_list = numpy.arange(1, 1_000_000_000) # calling tolist() on this is a big mistake!
+    # calling tolist() on this is a big mistake!
+    test_sorted_list = numpy.arange(1, 1_000_000_000)
     test_unsroted_list = numpy.random.randint(1_0, size=5).tolist()
     # test_unsroted_list = test_unsroted_list.tolist()
-    test_nearly_sorted_list = [9,1,2,3,4,5,6,7,8]  
+    test_nearly_sorted_list = [9, 1, 2, 3, 4, 5, 6, 7, 8]
     # print(test_unsroted_list, "unsorted list")
     # print(sort_algos.quick_sort(test_unsroted_list, 0 , len(test_unsroted_list) -1 ), "Quick sort")
-    print(sort_algos.radix_sort([23,45,665,32,7,9,92]), "radix sort")
+    print(sort_algos.radix_sort([23, 45, 665, 32, 7, 9, 92]), "radix sort")
     # print(sort_algos._get_digit(123, 1), "get digit")
     # print(sort_algos._get_larget_number([1,222,333,-12314214,123]), "get largest  number ")
-
-
 
     # print(sort_algos.merge_sort(test_unsroted_list), "Merge sort mine")
     # print(sort_algos.mergeSort(test_unsroted_list), "Merge sort GFG")
