@@ -3,7 +3,7 @@
 
 class SmallNode:
     def __repr__(self) -> str:
-        return "one node weak, many nodes doubly weak （︶^︶）"
+        return f"{self.val}"
 
     def __init__(self, value) -> None:
         self.val = value

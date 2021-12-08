@@ -32,7 +32,7 @@ class Queue:
         removes the first value from the stack
         """
         if self.length == 0:
-            return "Nothign to remove"
+            return None
         if self.length == 1:
             res = self.first
             self.first = None
