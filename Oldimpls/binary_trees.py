@@ -1,5 +1,5 @@
-from node import Node
-from Queueueueueueue import Queue
+from Oldimpls.node import Node
+from Oldimpls.Queueueueueueue import Queue
 
 
 class BinarySearchTree:

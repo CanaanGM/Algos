@@ -1,6 +1,6 @@
 from typing import Any
 
-from node import SmallNode
+from Oldimpls.node import SmallNode
 
 
 class SinglyLinkedList:

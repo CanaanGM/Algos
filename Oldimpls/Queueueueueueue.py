@@ -1,11 +1,9 @@
-""" 
-    the data structure, not to be confused with the awesome singer by the same name :P 
-    https://touhoudb.com/Ar/561
-"""
-from node import Node
+"enouph queque more pew pew"
+
+from Oldimpls.node import Node
 
 
-class Stack:
+class Queue:
     """Used Doubly linked list"""
 
     def __init__(self) -> None:
@@ -13,28 +11,28 @@ class Stack:
         self.first: Node = None
         self.last: Node = None
 
-    def push(self, val: any) -> int:
+    def enqueue(self, val: any) -> int:
         """
-        adds a new node to the start of the stack
+        adds a new node to the end of the stack
         """
         new_node = Node(val)
         if self.length == 0:
             self.first = new_node
             self.last = new_node
         else:
-            old_first = self.first
-            self.first = new_node
-            old_first.previous = self.first
-            self.first.next = old_first
+            old_last = self.last
+            self.last = new_node
+            old_last.next = self.last
+            self.last.previous = old_last
         self.length += 1
         return self.length
 
     def pop(self) -> Node:
         """
-        removes the last value from the stack
+        removes the first value from the stack
         """
         if self.length == 0:
-            return "Nothign to remove"
+            return None
         if self.length == 1:
             res = self.first
             self.first = None
@@ -42,12 +40,12 @@ class Stack:
             self.length -= 1
             return res
         else:
-            old_last = self.last
-            new_last = self.last.previous
-            new_last.next = None
-            self.last = new_last
+            old_first = self.first
+            new_first = self.first.next
+            new_first.previous = None
+            self.first = new_first
             self.length -= 1
-            return old_last
+            return old_first
 
     def print_dll(self) -> None:
         """
@@ -81,14 +79,17 @@ class Stack:
 
 
 if __name__ == "__main__":
-    stack = Stack()
-    stack.push("vergil")
-    stack.push("dante")
-    stack.push("alphrad")
-    stack.push("canaan")
-    stack.print_dll()
+    queue = Queue()
     print("=== old list ===")
-    print(stack.pop())
+    queue.enqueue("vergil")
+    queue.enqueue("dante")
+    queue.enqueue("alphrad")
+    queue.enqueue("canaan")
+    queue.print_dll()
+    print(queue.pop().val)
+    print(queue.enqueue("canaan"))
+    print(queue.enqueue("sparda"))
+
     print("=== new list ===")
 
-    stack.print_dll()
+    queue.print_dll()

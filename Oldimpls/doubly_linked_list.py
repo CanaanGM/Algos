@@ -1,4 +1,4 @@
-from node import Node
+from Oldimpls.node import Node
 
 
 class DoublyLinkedList:

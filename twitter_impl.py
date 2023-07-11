@@ -30,7 +30,7 @@ ID
 
 from collections import deque
 
-from doubly_linked_list import DoublyLinkedList
+from Oldimpls.doubly_linked_list import DoublyLinkedList
 
 
 class Twitter():
