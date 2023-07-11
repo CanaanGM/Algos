@@ -72,9 +72,24 @@ def after_tea(given_list: List, target: int) -> int :
         
 
 
-        
+def actual_solution(given_list, target):
+    num_map = {}
 
+    for idx, num in enumerate(given_list):
+        compliment = target - num
+        if compliment in num_map:
+            return [num_map[compliment], idx]
+        num_map[num] = idx
+    return []
 
 # print(first_two([2,11, 7,15], 9))
-print(second_attempt([2,11, 7,15], 9))
-print(after_tea([2,11, 7,15], 9))
+# print(second_attempt([2,11, 7,15], 9))
+# print(after_tea([2,11, 7,15], 9))
+
+print ( actual_solution([2, 7, 11, 15], 9) )
+print ( actual_solution([3, 2, 4], 6) )
+print ( actual_solution([3, 3], 6) )
+print ( actual_solution([1, 2, 3, 4, 5], 10) )
+print ( actual_solution([1, 2, 3, 4, 5], 7) )
+print ( actual_solution([1, 2, 3, 4, 5], 3) )
+print ( actual_solution([], 0) )
